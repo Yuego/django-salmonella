@@ -3,7 +3,7 @@ from django.contrib.admin import widgets
 from django.core.urlresolvers import reverse, NoReverseMatch
 from django.core.exceptions import ImproperlyConfigured
 from django.template.loader import render_to_string
-from django.utils.encoding import force_unicode
+from django.utils.encoding import force_text
 
 
 class SalmonellaImproperlyConfigured(ImproperlyConfigured):
@@ -62,7 +62,7 @@ class SalmonellaMultiIdWidget(SalmonellaIdWidget):
             attrs = {}
         attrs['class'] = 'vManyToManyRawIdAdminField'
         if value:
-            value = ','.join([force_unicode(v) for v in value])
+            value = ','.join([force_text(v) for v in value])
         else:
             value = ''
         return super(SalmonellaMultiIdWidget, self).render(name, value,

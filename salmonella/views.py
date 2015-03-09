@@ -3,7 +3,11 @@ from django.conf import settings
 from django.contrib.auth.decorators import user_passes_test
 from django.http import HttpResponseBadRequest, HttpResponseForbidden
 from django.shortcuts import render_to_response
-from django.db.models import get_model
+try:
+    from django.apps import apps as app_config
+    get_model = app_config.get_model
+except ImportError:
+    from django.db.models import get_model
 
 
 @user_passes_test(lambda u: u.is_staff)
